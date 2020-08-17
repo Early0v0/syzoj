@@ -163,6 +163,6 @@
   ]
   "calendar": {
     "enable": false,
-    "apiUrl": ""
+    "api_url": ""
   }
 }
