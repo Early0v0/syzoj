@@ -6,7 +6,10 @@ app.get('/calendar', async (req, res) => {
       err: null
     });
   } else {
-    const data = await (await fetch(syzoj.config.calendar.api_url)).json();
+    const data = (await fetch(syzoj.config.calendar.api_url))
+      .then(function(resp) {
+        return resp.json();
+      });
 
     if (data.status !== 'OK') {
       res.render('error', {
