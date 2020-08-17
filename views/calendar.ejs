@@ -34,7 +34,7 @@
           ++i;
       %>
         <td><b><%= i %></b></td>
-        <td><%= contest.oj %></td>
+        <td><%= contest.oj.name %></td>
         <td><a href="<%= contest.url %>"><%= contest.name %></a></td>
         <td><%= moment(contest.startTime).format('MM 月 DD 日 HH:mm') %></td>
         <td><%= moment(contest.endTime).format('MM 月 DD 日 HH:mm') %></td>
