@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 app.get('/calendar', async (req, res) => {
   if (!syzoj.config.calendar.enable) {
     res.render('error', {
