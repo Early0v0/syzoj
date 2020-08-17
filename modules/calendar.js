@@ -11,7 +11,7 @@ app.get('/calendar', async (req, res) => {
         return response.json();
       });
 
-    if (data.status !== 'OK') {
+    if (data.status != 'OK') {
       res.render('error', {
         err: data.message
       });
