@@ -161,4 +161,8 @@
       "icon": "bullhorn"
     }
   ]
+  "calendar": {
+    "enable": false,
+    "apiUrl": ""
+  }
 }
