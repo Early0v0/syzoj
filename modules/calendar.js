@@ -14,14 +14,18 @@ function parseMinutes(minutes) {
 app.get('/calendar', async (req, res) => {
   if (!syzoj.config.calendar.enable) {
     res.render('error', {
-      err: null
+      err: '未开启日历功能。'
+    });
+  } else if (!syzoj.config.calendar.api_url) {
+    res.render('error', {
+      err: '日历配置有误，请联系管理员。'
     });
   } else {
     const data = await(await fetch(syzoj.config.calendar.api_url)).json();
 
     if (data.status !== 'OK') {
       res.render('error', {
-        err: data.message
+        err: 'API 可能出现了些小问题？<br><a href="' + syzoj.config.calendar.api_url + '">戳这里看看。</a>'
       });
     } else {
       let contests = [];
