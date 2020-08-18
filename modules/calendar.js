@@ -1,4 +1,15 @@
 const fetch = require("node-fetch");
+const moment = require('moment');
+
+parseMinutes(minutes) {
+  const days = parseInt(minutes / 60 / 24), hours = parseInt(minutes / 60) % 24;
+  minutes = minutes % 60;
+  return [
+    days && `${days} 天`,
+    hours && `${hours} 小时`,
+    minutes && `${minutes} 分钟`
+  ].filter(str => !!str).join(' ');
+}
 
 app.get('/calendar', async (req, res) => {
   if (!syzoj.config.calendar.enable) {
@@ -17,6 +28,7 @@ app.get('/calendar', async (req, res) => {
       for (let oj of data.oj) {
         for (let contest of oj.contests) {
           contest.oj = oj;
+          contest.lastTime = parseMinutes(moment(contest.endTime).diff(contest.startTime, 'm'));
           contests.push(contest);
         }
       }

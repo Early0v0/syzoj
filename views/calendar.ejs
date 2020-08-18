@@ -1,20 +1,6 @@
 <% this.title = '日历' %>
 <% include header %>
 
-<%
-  const moment = require('moment');
-
-  parseMinutes(minutes) {
-    const days = parseInt(minutes / 60 / 24), hours = parseInt(minutes / 60) % 24;
-    minutes = minutes % 60;
-    return [
-      days && `${days} 天`,
-      hours && `${hours} 小时`,
-      minutes && `${minutes} 分钟`
-    ].filter(str => !!str).join(' ');
-  }
-%>
-
 <div class="padding">
   <table class="ui very basic center aligned table" style="table-layout: fixed">
     <thead>
@@ -38,7 +24,7 @@
         <td><a href="<%= contest.url %>"><%= contest.name %></a></td>
         <td><%= moment(contest.startTime).format('MM 月 DD 日 HH:mm') %></td>
         <td><%= moment(contest.endTime).format('MM 月 DD 日 HH:mm') %></td>
-        <td><%= parseMinutes(moment(contest.endTime).diff(contest.startTime, 'm')) %></td>
+        <td><%= lastTime %></td>
       <% } %>
     </tbody>
   </table>
