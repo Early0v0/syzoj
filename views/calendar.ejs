@@ -19,12 +19,14 @@
         for (let contest of contests) {
           ++i;
       %>
-        <td><b><%= i %></b></td>
-        <td><%= contest.oj.name %></td>
-        <td><a href="<%= contest.url %>"><%= contest.name %></a></td>
-        <td><%= contest.startTime %></td>
-        <td><%= contest.endTime %></td>
-        <td><%= contest.lastTime %></td>
+        <tr>
+          <td><b><%= i %></b></td>
+          <td><%= contest.oj.name %></td>
+          <td><a href="<%= contest.url %>"><%= contest.name %></a></td>
+          <td><%= contest.startTime %></td>
+          <td><%= contest.endTime %></td>
+          <td><%= contest.lastTime %></td>
+        </tr>
       <% } %>
     </tbody>
   </table>
