@@ -1,8 +1,6 @@
 <% this.title = '日历' %>
 <% include header %>
 
-<% const moment = require('moment') %>
-
 <div class="padding">
   <table class="ui very basic center aligned table" style="table-layout: fixed">
     <thead>
@@ -24,9 +22,9 @@
         <td><b><%= i %></b></td>
         <td><%= contest.oj.name %></td>
         <td><a href="<%= contest.url %>"><%= contest.name %></a></td>
-        <td><%= moment(contest.startTime).format('MM 月 DD 日 HH:mm') %></td>
-        <td><%= moment(contest.endTime).format('MM 月 DD 日 HH:mm') %></td>
-        <td><%= lastTime %></td>
+        <td><%= contest.startTime %></td>
+        <td><%= contest.endTime %></td>
+        <td><%= contest.lastTime %></td>
       <% } %>
     </tbody>
   </table>

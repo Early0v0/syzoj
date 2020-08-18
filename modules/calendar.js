@@ -28,6 +28,8 @@ app.get('/calendar', async (req, res) => {
       for (let oj of data.oj) {
         for (let contest of oj.contests) {
           contest.oj = oj;
+          contest.startTime = moment(contest.startTime).format('MM 月 DD 日 HH:mm');
+          contest.endTime = moment(contest.endTime).format('MM 月 DD 日 HH:mm');
           contest.lastTime = parseMinutes(moment(contest.endTime).diff(contest.startTime, 'm'));
           contests.push(contest);
         }
