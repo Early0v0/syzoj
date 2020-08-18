@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const moment = require('moment');
 
-parseMinutes(minutes) {
+function parseMinutes(minutes) {
   const days = parseInt(minutes / 60 / 24), hours = parseInt(minutes / 60) % 24;
   minutes = minutes % 60;
   return [
