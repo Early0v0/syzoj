@@ -21,26 +21,32 @@ app.get('/calendar', async (req, res) => {
       err: '日历配置有误，请联系管理员。'
     });
   } else {
-    const data = await(await fetch(syzoj.config.calendar.api_url)).json();
+    try {
+      const data = await(await fetch(syzoj.config.calendar.api_url)).json();
 
-    if (data.status !== 'OK') {
-      res.render('error', {
-        err: 'API 可能出现了些小问题？<br><a href="' + syzoj.config.calendar.api_url + '">戳这里看看。</a>'
-      });
-    } else {
-      let contests = [];
-      for (let oj of data.oj) {
-        for (let contest of oj.contests) {
-          contest.oj = oj;
-          contest.lastTime = parseMinutes(moment(contest.endTime).diff(contest.startTime, 'm'));
-          contest.startTime = moment(contest.startTime).format('MM 月 DD 日 HH:mm');
-          contest.endTime = moment(contest.endTime).format('MM 月 DD 日 HH:mm');
-          contests.push(contest);
+      if (data.status !== 'OK') {
+        res.render('error', {
+          err: 'API 可能出现了些小问题？<br><a href="' + syzoj.config.calendar.api_url + '">戳这里看看。</a>'
+        });
+      } else {
+        let contests = [];
+        for (let oj of data.oj) {
+          for (let contest of oj.contests) {
+            contest.oj = oj;
+            contest.lastTime = parseMinutes(moment(contest.endTime).diff(contest.startTime, 'm'));
+            contest.startTime = moment(contest.startTime).format('MM 月 DD 日 HH:mm');
+            contest.endTime = moment(contest.endTime).format('MM 月 DD 日 HH:mm');
+            contests.push(contest);
+          }
         }
+        contests.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+        res.render('calendar', {
+          contests: contests
+        });
       }
-      contests.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
-      res.render('calendar', {
-        contests: contests
+    } catch (err) {
+      res.render('error', {
+        err: err
       });
     }
   }
