@@ -21,7 +21,10 @@
       %>
         <tr>
           <td><b><%= i %></b></td>
-          <td><%= contest.oj.name %></td>
+          <td>
+            <img src="<%= contest.oj.icon.url %>" alt="<%= contest.oj.name %>" class="oj-icon <%= contest.oj.icon.variety %>">
+            <%= contest.oj.name %>
+          </td>
           <td><a href="<%= contest.url %>"><%= contest.name %></a></td>
           <td><%= contest.startTime %></td>
           <td><%= contest.endTime %></td>
